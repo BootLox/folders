@@ -16,9 +16,9 @@ var score = 0;
 function preload(){
   playerImage = loadImage("https://surrogate.hackedu.us/i.imgur.com/N5uCbDu.png");
   enemyImage = loadImage("https://surrogate.hackedu.us/i.imgur.com/OdL0XPt.png");
-  enemyImage2 = loadImage("https://surrogate.hackedu.us/i.imgur.com/OdL0XPt.png");
+   enemyImage2 = loadImage("https://surrogate.hackedu.us/i.imgur.com/OdL0XPt.png");
   backgroundImage = loadImage("https://surrogate.hackedu.us/i.imgur.com/aKQOg3G.png");
-} 
+}
 
 
 // Main setup loop, runs once per page load
@@ -63,27 +63,27 @@ function draw() {
         textAlign(CENTER);
         fill("white");
         text("Score: "+score, width/2, height/2-110);
-
-        // If player is not touching the left edge
-        if (player.position.x < (width-25)) {
-            // And either D or -> key is pressed
-            if(keyDown("d") | keyDown(39)) {
-                // Move player right
-                player.position.x = player.position.x + 5;
-            }
+        
+        if(enemy.position.x > (player.position.x-40) && enemy.position.x < (player.position.x+40)) {
+            //if(player.position.x < 50)
+            player.position.x += 5;
         }
-
-        // If player is not touching the right edge
-        if (player.position.x > 25) {
-            // And either A or <- key is pressed
-            if(keyDown("a") | keyDown(37)) {
-                // Move player left
-                player.position.x = player.position.x - 5;
-            }
+        
+        if(enemy2.position.x > (player.position.x-40) && enemy2.position.x < (player.position.x+40)) {
+            player.position.x -= 5;
+        }
+        
+        // 
+        if(player.position.x < 0) {
+            player.position.x = 0;
+        }
+        
+        if(player.position.x > 240) {
+            player.position.x = 240;
         }
 
         // Move enemy down by 5
-        enemy.position.y += random(1,7);
+        enemy.position.y += random(1,7)
 
         // Once enemy has left screen, move to top and randomize x position
         if (enemy.position.y > height) {
@@ -92,8 +92,8 @@ function draw() {
             score++;
         }
               
-              // Move enemy down by 5
-        enemy2.position.y += random(1,7);
+        // Move enemy down by 5
+        enemy2.position.y += random(1,7)
 
         // Once enemy has left screen, move to top and randomize x position
         if (enemy2.position.y > height) {
@@ -101,10 +101,9 @@ function draw() {
             enemy2.position.x = random(5, width-5);
             score++;
         }
-        
 
         // debug
-        //console.log("Enemy X: "+enemy.position.x+", Enemy Y: "+enemy.position.y+", Player X: "+player.position.x+", Player Y: "+player.position.y);
+        console.log("Enemy X: "+enemy.position.x+", Enemy Y: "+enemy.position.y+", Player X: "+player.position.x+", Player Y: "+player.position.y);
     }
 }
 
@@ -145,9 +144,8 @@ function mouseClicked() {
 }
 
 function keyPressed() {
-    //If key pressed is not A, D, <- or ->, then restart game
-     //(done to prevent accidental restarts)
-    if(keyCode !== 65 && keyCode !== 68 && keyCode !== 39 && keyCode !== 37 && isGameOver) {
+    //If key pressed, then restart game
+    if(isGameOver) {
        restartGame(); 
     }
     
