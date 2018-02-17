@@ -15,7 +15,7 @@ var points = [];
 
 function setup() {
    var canvas = createCanvas(windowWidth, windowHeight);
-  background(255);
+  background(250);
   fill(0);
  
   pointsData.on("child_added", function (point) {
@@ -32,7 +32,7 @@ function setup() {
 
 
 function draw() {
-     background(255);
+     background(250);
 
   for (var i = 0; i < points.length; i++) {
     var point = points[i];
