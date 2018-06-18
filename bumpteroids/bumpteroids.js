@@ -2,7 +2,7 @@ var ship;
 var asteroids
 var bullets;
 var bulletimage; var backgroundImage; var particleImage; var shipImage;
-
+//change
 function preload() {
   // load images
   backgroundImage = loadImage("images/background.jpg");
